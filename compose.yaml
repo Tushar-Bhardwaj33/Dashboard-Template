@@ -1,0 +1,17 @@
+services:
+  js-app:
+    # The main React dashboard app
+    container_name: js-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"  # Expose the port as defined in Dockerfile
+    restart: unless-stopped
+    init: true
+    # env_file: ./.env  # Uncomment if .env file exists
+    # No volumes needed as this is a frontend static build
+    # No external dependencies detected
+
+# No external services (databases, caches, etc.) were detected in the README, Dockerfile, or source code.
+# No volumes section is included as there are no persistent data requirements.

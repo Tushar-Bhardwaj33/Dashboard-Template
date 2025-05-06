@@ -1,0 +1,68 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log
+yarn-debug.log
+
+# Version control
+.git/
+.gitignore
+
+# IDE/editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Build outputs
+build/
+dist/
+out/
+
+# Test and debug artifacts
+test/
+tests/
+debug/
+*.log
+
+# Temporary files and folders
+tmp/
+temp/
+*.tmp
+
+# Environment and secrets
+.env*
+*.env
+*.pem
+*.key
+*.crt
+config.local.*
+*.local.yml
+
+# Documentation
+README*
+*.md
+docs/
+
+# Docker files
+Dockerfile*
+docker-compose*
+
+# Project-specific local/dev folders
+.local/
+local/
+
+# Public assets (if not needed in build, uncomment the next line)
+# public/assets/
+
+# Miscellaneous
+*.bak
+*.old
+*.orig
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# SVN/Mercurial
+.svn/
+.hg/

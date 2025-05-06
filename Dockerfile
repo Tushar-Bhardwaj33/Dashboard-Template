@@ -1,0 +1,42 @@
+# syntax=docker/dockerfile:1
+ARG NODE_VERSION=22.13.1
+
+# Build stage
+FROM node:${NODE_VERSION}-slim AS builder
+WORKDIR /app
+
+# Install dependencies with cache and bind mounts for deterministic builds
+COPY --link package.json package-lock.json ./
+RUN --mount=type=cache,target=/root/.npm \
+    --mount=type=bind,source=package.json,target=package.json \
+    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+    npm ci --legacy-peer-deps
+
+# Copy the rest of the application source
+COPY --link public ./public
+COPY --link src ./src
+
+# Build the React app
+RUN npm run build
+
+# Production stage
+FROM node:${NODE_VERSION}-slim AS final
+WORKDIR /app
+
+# Install 'serve' globally as root
+RUN npm install -g serve
+
+# Create non-root user
+RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
+
+# Copy built app and only production dependencies
+COPY --from=builder /app/build ./build
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./
+
+ENV NODE_ENV=production
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+USER appuser
+
+EXPOSE 5000
+CMD ["serve", "-s", "build", "-l", "5000"]
