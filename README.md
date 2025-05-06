@@ -22,6 +22,12 @@ A responsive and feature-rich admin dashboard built with React, Material-UI, and
 - **React Router**: Declarative routing for React.js applications.
 - **Axios**: Promise-based HTTP client for making API requests.
 
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Tushar-Bhardwaj33/React-Admin-Dashboard.git
+
 ## Running with Docker
 
 This project includes Docker and Docker Compose support for easy setup and deployment.
